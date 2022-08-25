@@ -4,13 +4,13 @@
     {
         public InventoryProduct()
         {
-            Orders = new HashSet<OrderInventory>();
+            OrderInventories = new HashSet<OrderInventory>();
         }
 
         public int Id { get; set; }
         public string Name { get; set; } = null!;
         public int Qoh { get; set; }
 
-        public virtual ICollection<OrderInventory> Orders { get; set; }
+        public virtual ICollection<OrderInventory> OrderInventories { get; set; }
     }
 }

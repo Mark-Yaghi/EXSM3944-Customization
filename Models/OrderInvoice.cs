@@ -4,7 +4,7 @@
     {
         public OrderInvoice()
         {
-            OrderInventories = new HashSet<OrderInventory>
+            OrderInventories = new HashSet<OrderInventory>();
         }
 
         public int Id { get; set; }
