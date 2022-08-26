@@ -4,34 +4,39 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Create New Inventory Order</h1>
+<br />
 
-<h4>OrderInventory</h4>
+<h4>Add Inventory to an Order below.</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Orderid" class="control-label"></label>
+                <label asp-for="Orderid" class="control-label">Order ID</label>
                 <select asp-for="Orderid" class ="form-control" asp-items="ViewBag.Orderid"></select>
             </div>
+            <br />
             <div class="form-group">
-                <label asp-for="Inventoryid" class="control-label"></label>
+                <label asp-for="Inventoryid" class="control-label">Inventory ID</label>
                 <select asp-for="Inventoryid" class ="form-control" asp-items="ViewBag.Inventoryid"></select>
             </div>
+            <br />
             <div class="form-group">
-                <label asp-for="Quantity" class="control-label"></label>
+                <label asp-for="Quantity" class="control-label">Quantity Ordered</label>
                 <input asp-for="Quantity" class="form-control" />
                 <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save New Order" class="btn btn-primary" />
+                <input type="reset"  value="Clear Fields"   class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-
+<br />
 <div>
     <a asp-action="Index">Back to List</a>
 </div>

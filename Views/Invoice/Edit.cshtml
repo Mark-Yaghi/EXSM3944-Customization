@@ -4,27 +4,29 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>OrderInvoice</h4>
+<h1>Edit Invoices</h1>
+<br />
+<h4>Use the page below to substitute one customer for another for a given Invoice.</h4>
 <hr />
+<br />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="Customerid" class="control-label"></label>
+                <label asp-for="Customerid" class="control-label">Customer Name</label>
                 <select asp-for="Customerid" class="form-control" asp-items="ViewBag.Customerid"></select>
                 <span asp-validation-for="Customerid" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save Changes" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-
+<br />
 <div>
     <a asp-action="Index">Back to List</a>
 </div>

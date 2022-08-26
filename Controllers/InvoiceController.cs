@@ -48,7 +48,7 @@ namespace MVC_Demo.Controllers
         // GET: Invoice/Create
         public IActionResult Create()
         {
-            ViewData["Customerid"] = new SelectList(_context.Customers, "Id", "Id");
+            ViewData["Customerid"] = new SelectList(_context.Customers, "Id", "FullName");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace MVC_Demo.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Customerid"] = new SelectList(_context.Customers, "Id", "Id", orderInvoice.Customerid);
+            ViewData["Customerid"] = new SelectList(_context.Customers, "Id", "FullName", orderInvoice.Customerid);
             return View(orderInvoice);
         }
 
@@ -82,12 +82,12 @@ namespace MVC_Demo.Controllers
             {
                 return NotFound();
             }
-            ViewData["Customerid"] = new SelectList(_context.Customers, "Id", "Id", orderInvoice.Customerid);
+            ViewData["Customerid"] = new SelectList(_context.Customers, "Id", "FullName", orderInvoice.Customerid);
             return View(orderInvoice);
         }
 
         // POST: Invoice/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // To protect from overposting attacks, enable the specific properties you want to bind t
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]

@@ -4,32 +4,35 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Customer</h4>
+<h1>Edit Customer Information</h1>
+<br />
+<h4>Here you can edit a customer's first or last name.</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
+            <br />
             <div class="form-group">
-                <label asp-for="Firstname" class="control-label"></label>
+                <label asp-for="Firstname" class="control-label">First Name</label>
                 <input asp-for="Firstname" class="form-control" />
                 <span asp-validation-for="Firstname" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <label asp-for="Lastname" class="control-label"></label>
+                <label asp-for="Lastname" class="control-label">Last Name</label>
                 <input asp-for="Lastname" class="form-control" />
                 <span asp-validation-for="Lastname" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save Changes" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-
+<br />
 <div>
     <a asp-action="Index">Back to List</a>
 </div>

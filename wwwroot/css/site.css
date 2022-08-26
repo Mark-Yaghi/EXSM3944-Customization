@@ -1,5 +1,7 @@
 html {
   font-size: 14px;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-style:italic;
 }
 
 @media (min-width: 768px) {
@@ -15,4 +17,18 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-color:antiquewhite;
+}
+
+.nav-item:hover
+{
+    background-color:aqua;
+    font-weight:bold;
+
+}
+
+.hline
+{
+    color:black;
+
 }

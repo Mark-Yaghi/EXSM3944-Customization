@@ -11,15 +11,18 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVC_Demo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220823153724_CreateIdentitySchema")]
-    partial class CreateIdentitySchema
+    [Migration("20220825160931_Exercise-02")]
+    partial class Exercise02
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .UseCollation("utf8mb4_general_ci")
                 .HasAnnotation("ProductVersion", "6.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            MySqlModelBuilderExtensions.HasCharSet(modelBuilder, "utf8mb4");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -217,6 +220,95 @@ namespace MVC_Demo.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("MVC_Demo.Models.Customer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int(11)")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Firstname")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("firstname");
+
+                    b.Property<string>("Lastname")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("lastname");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("customer", (string)null);
+                });
+
+            modelBuilder.Entity("MVC_Demo.Models.InventoryProduct", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int(11)")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Qoh")
+                        .HasColumnType("int(11)")
+                        .HasColumnName("qoh");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("inventoryproduct", (string)null);
+                });
+
+            modelBuilder.Entity("MVC_Demo.Models.OrderInventory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int(11)")
+                        .HasColumnName("id");
+
+                    b.Property<int>("Inventoryid")
+                        .HasColumnType("int(11)")
+                        .HasColumnName("inventoryid");
+
+                    b.Property<int>("Orderid")
+                        .HasColumnType("int(11)")
+                        .HasColumnName("orderid");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int(11)")
+                        .HasColumnName("quantity");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex(new[] { "Inventoryid" }, "FK_OrderInventory_InventoryProduct");
+
+                    b.HasIndex(new[] { "Orderid" }, "FK_OrderInventory_OrderInvoice");
+
+                    b.ToTable("orderinventory", (string)null);
+                });
+
+            modelBuilder.Entity("MVC_Demo.Models.OrderInvoice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int(11)")
+                        .HasColumnName("id");
+
+                    b.Property<int>("Customerid")
+                        .HasColumnType("int(11)")
+                        .HasColumnName("customerid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex(new[] { "Customerid" }, "FK_OrderInvoice_Customer");
+
+                    b.ToTable("orderinvoice", (string)null);
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -266,6 +358,51 @@ namespace MVC_Demo.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("MVC_Demo.Models.OrderInventory", b =>
+                {
+                    b.HasOne("MVC_Demo.Models.InventoryProduct", "Product")
+                        .WithMany("OrderInventories")
+                        .HasForeignKey("Inventoryid")
+                        .IsRequired()
+                        .HasConstraintName("FK_OrderInventory_InventoryProduct");
+
+                    b.HasOne("MVC_Demo.Models.OrderInvoice", "Order")
+                        .WithMany("OrderInventories")
+                        .HasForeignKey("Orderid")
+                        .IsRequired()
+                        .HasConstraintName("FK_OrderInventory_OrderInvoice");
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("MVC_Demo.Models.OrderInvoice", b =>
+                {
+                    b.HasOne("MVC_Demo.Models.Customer", "Customer")
+                        .WithMany("OrderInvoices")
+                        .HasForeignKey("Customerid")
+                        .IsRequired()
+                        .HasConstraintName("FK_OrderInvoice_Customer");
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("MVC_Demo.Models.Customer", b =>
+                {
+                    b.Navigation("OrderInvoices");
+                });
+
+            modelBuilder.Entity("MVC_Demo.Models.InventoryProduct", b =>
+                {
+                    b.Navigation("OrderInventories");
+                });
+
+            modelBuilder.Entity("MVC_Demo.Models.OrderInvoice", b =>
+                {
+                    b.Navigation("OrderInventories");
                 });
 #pragma warning restore 612, 618
         }

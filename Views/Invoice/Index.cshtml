@@ -4,17 +4,27 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
+<h1> Invoices</h1>
+<br />
+<h4>Use the form below to add, view, edit, or delete an invoice.
+   
+</h4>
+<br />
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class = "btn btn-primary"asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Customer)
+                <!--@Html.DisplayNameFor(model => model.Id)-->
+                Customer ID Number
             </th>
+            <th>
+                <!--@Html.DisplayNameFor(model => model.Customer)-->
+                Customer Name
+            </th>
+
             <th></th>
         </tr>
     </thead>
@@ -22,12 +32,18 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Customer.Id)
+                 @Html.DisplayFor(modelItem => item.Customer.Id)
             </td>
+            
+            
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @Html.DisplayFor(modelItem => item.Customer.FullName)
+            </td>
+              
+            <td>
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

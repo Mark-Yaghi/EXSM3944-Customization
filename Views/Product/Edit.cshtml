@@ -4,9 +4,9 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>InventoryProduct</h4>
+<h1>Edit Product Page</h1>
+<br />
+<h4>Use the form below to edit the product name and/or quantity.</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -18,14 +18,17 @@
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <label asp-for="Qoh" class="control-label"></label>
+                <label asp-for="Qoh" class="control-label">Adjust Product Quantity (+ / -)</label>
                 <input asp-for="Qoh" class="form-control" />
                 <span asp-validation-for="Qoh" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
+            <br />
         </form>
     </div>
 </div>
